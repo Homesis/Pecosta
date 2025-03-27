@@ -14,11 +14,17 @@ namespace Pecosta
         public decimal Quantity;
         public decimal UnitPrice;
         public string Unit;
-        public decimal VatRate;
+        public int VatRate;
 
         public Product(string productName, string? catalogCode, decimal quantity, decimal unitPrice, decimal vatRate, string unit = "j.")
         {
+            if (productName.Length < 3)
+            {
+                throw new ArgumentException("Product name cannot be that short");
+            }
             ProductName = productName;
+            
+
             if (catalogCode == null)
             {
                 Random random = new Random();
@@ -42,16 +48,25 @@ namespace Pecosta
             }
             UnitPrice = unitPrice;
 
-            Unit = unit;
-
-            if (vatRate < 0)
+            if (Enum.TryParse(typeof(EUnit), unit.ToLower(), out _))
             {
-                throw new ArgumentException("Vat rate cannot be negative");
+                Unit = unit;
             }
-            if (vatRate > 100) {
-                throw new ArgumentException("Vat rate cannot be greater than 100");
+            else
+            {
+                throw new ArgumentException("Invalid unit");
             }
-            VatRate = vatRate;
+
+            int intVat = (int)vatRate;
+            if (Enum.IsDefined(typeof(EVatRate),intVat))
+            {
+                VatRate = intVat;
+            }
+            else
+            {
+                throw new ArgumentException("Invalid VatRate");
+            }
+
         }
 
         public override string ToString()

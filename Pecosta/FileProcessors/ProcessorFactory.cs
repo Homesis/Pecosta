@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Pecosta
 {
-    public class ProcesorFactory
+    public class ProcessorFactory
     {
         public static IInvoiceProcesor GetProcessor(string filePath)
         {
