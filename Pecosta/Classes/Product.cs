@@ -16,7 +16,7 @@ namespace Pecosta
         public string Unit;
         public int VatRate;
 
-        public Product(string productName, string? catalogCode, decimal quantity, decimal unitPrice, decimal vatRate, string unit = "j.")
+        public Product(string productName, string? catalogCode, decimal quantity, decimal unitPrice, decimal vatRate, string unit = "j")
         {
             if (productName.Length < 3)
             {
